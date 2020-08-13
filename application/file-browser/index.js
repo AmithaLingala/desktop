@@ -1,4 +1,4 @@
-import Paths from '/data/paths.js'
+import Paths from '../../data/paths.js'
 
 const pathNode = document.getElementById('folders');
 

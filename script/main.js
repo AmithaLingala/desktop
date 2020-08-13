@@ -1,4 +1,4 @@
-import Application from '/script/ui/application.js'
+import Application from './ui/application.js'
 
 const appList = [];
 
@@ -13,8 +13,12 @@ function toggleMenu() {
 
 for (let element of document.getElementsByClassName('launcher')) {
     element.onclick = () => {
-        const app = new Application(element.getAttribute('link'));
-        appList.push(app);
+        const tmpApp = new Application(element.getAttribute('link'), element.getAttribute('app-width'), element.getAttribute('app-height'));
+        appList.push(tmpApp);
+        tmpApp.addCloseEventListener(function(appRef) {
+            let index = appList.findIndex(item => item === appRef);
+            appList.splice(index, 1);
+        });
         toggleMenu();
     }
 }
@@ -22,10 +26,10 @@ for (let element of document.getElementsByClassName('launcher')) {
 document.getElementById('toggle-menu').onclick = toggleMenu;
 
 //
-let mouse_down = false;
-let app = null;
+let isMouseDown = false;
+let app = undefined;
 window.addEventListener("mousemove", function(e) {
-    if (mouse_down && app) {
+    if (isMouseDown && app !== undefined) {
         app.setX(e.x);
         app.setY(e.y);
     }
@@ -41,13 +45,13 @@ window.addEventListener("mousedown", function(e) {
         app.y + app.headerHeight < e.y
     ));
 
-    if (app) {
-        mouse_down = true;
+    if (app !== undefined) {
+        isMouseDown = true;
         app.xOffset = app.x - X;
         app.yOffset = app.y - Y;
     }
 });
 window.addEventListener("mouseup", function() {
-    mouse_down = false;
+    isMouseDown = false;
     app = null;
 });

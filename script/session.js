@@ -1,4 +1,4 @@
-import Process from "./process";
+import Process from "./process.js";
 
 export default class Session {
     /**
@@ -14,10 +14,10 @@ export default class Session {
     }
 
     /**
-    * Add a new process to the current session.
-    * 
-    * @param {Process} process - The process to add.
-    */
+     * Add a new process to the current session.
+     * 
+     * @param {Process} process - The process to add.
+     */
     addProcess(process) {
         this.processList.push(process);
     }
@@ -33,11 +33,11 @@ export default class Session {
     }
 
     /**
-    * Kill the process tagged to given process-id if it is in current session.
-    *
-    * @param {number} process_id - The process-id to kill.
-    * @returns {number} process kill status.
-    */
+     * Kill the process tagged to given process-id if it is in current session.
+     *
+     * @param {number} process_id - The process-id to kill.
+     * @returns {number} process kill status.
+     */
     kill(process_id) {
         const index = this.processList.findIndex(process => process.process_id === process_id);
         this.processList[index].kill().then(() => this.processList.splice(index, 0));
