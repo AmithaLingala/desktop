@@ -35,3 +35,35 @@ body {
     min-height: 50px;
     background-color: #222222;
 }
+
+
+.menu {
+    display: block;
+    background-color: #e2e2e2;
+    border: none;
+    color: black;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.launcher {
+    display: block;
+    width: 100%;
+    background-color: #202f50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 1em;
+}
+
+.launcher:hover {
+    background-color: #4c74af;
+    color: white;
+}

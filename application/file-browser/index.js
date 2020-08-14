@@ -4,9 +4,12 @@ const pathNode = document.getElementById('folders');
 
 function generatePath(pathList, pathNode) {
     pathList.forEach(path => {
-        const item = document.createElement('li');
-        item.innerHTML = path.name;
-        pathNode.appendChild(item);
+        const itemdt = document.createElement('dt');
+        const itemdd = document.createElement('dd');
+        itemdt.classList.add('folder');
+        itemdd.innerHTML = path.name;
+        pathNode.appendChild(itemdt);
+        pathNode.appendChild(itemdd);
     });
 }
 
