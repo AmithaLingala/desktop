@@ -1,29 +1,77 @@
+.window {
+    display: grid;
+    grid-template-columns: minmax(100px, auto);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.hide {
+    display: none;
+}
+
 .folder {
-    display: block;
+    display: inline-block;
     width: 50px;
     height: 50px;
     background-image: url(../../images/icons/folder.svg);
     background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     margin-left: 1em;
-    margin-top: 1em;
-    cursor: pointer;
 }
 
 .file {
-    display: block;
+    display: inline-block;
     width: 55px;
     height: 55px;
     background-image: url(../../images/icons/file.svg);
     background-size: contain;
-    margin-left: 1em;
-    margin-top: 1em;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.folder-container {
+    display: inline-block;
     cursor: pointer;
 }
 
 dd {
     display: block;
+    text-align: center;
     margin-left: 1em;
     color: whitesmoke;
     font-weight: bolder;
     cursor: pointer;
+}
+
+.header {
+    background-color: #323232;
+    margin: -0.5em;
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+.header Button {
+    display: inline-block;
+    background-color: #424242;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 0.5em;
+    margin-left: 0.5em;
+}
+
+.header Button:hover {
+    background-color: #4c74af;
+    color: white;
+}
+
+.placeholder {
+    margin: 0 auto;
+    width: 100%;
+    color: tomato;
+    text-align: center;
 }
