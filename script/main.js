@@ -3,7 +3,7 @@ import AppList from '../data/apps.js';
 
 const appList = [];
 
-
+// Toggle app menu visibility
 function toggleMenu() {
     const classes = document.getElementById('menu-drawer').classList;
     if (classes.contains('hide')) {
@@ -13,28 +13,8 @@ function toggleMenu() {
     }
 }
 
-function generateAppCategories() {
-    const allApps = [];
-    const categorizedApps = AppList.getApps();
-    for (let key of Object.keys(categorizedApps)) {
-        allApps.push(...categorizedApps[key]);
-    }
-    generateAppMenuList("All Applications", allApps);
-    for (let key of Object.keys(categorizedApps)) {
-        generateAppMenuList(key, categorizedApps[key]);
-    }
-    document.getElementById('All-Applications').classList.remove('hide');
-}
-
-function generateAppMenuList(categoryName, apps) {
-    // id to be used for buttons
-    const id = categoryName.replace(' ', '-');
-
-    // categories and wrapper for app list
-    const categories = document.getElementById('categories');
-    const genAppList = document.getElementById('app-list');
-
-    // generate category button
+// Generate category button
+function generateCategoryButton(id, categoryName) {
     const wrapper = document.createElement('div');
     const categoryBtn = document.createElement('input');
     const categoryLabel = document.createElement('label');
@@ -47,7 +27,6 @@ function generateAppMenuList(categoryName, apps) {
 
     wrapper.appendChild(categoryBtn);
     wrapper.appendChild(categoryLabel);
-    categories.appendChild(wrapper);
 
     // Display apps belong to specific category on click
     categoryBtn.onclick = () => {
@@ -57,14 +36,14 @@ function generateAppMenuList(categoryName, apps) {
         }
         document.getElementById(categoryName.replace(' ', '-')).classList.remove('hide');
     };
+    return wrapper;
+}
 
-
-    // Generate App list 
+// Generate App list holder
+function generateCategoryHolder(id, apps) {
     const categoryHolder = document.createElement('div');
     categoryHolder.id = id;
     categoryHolder.classList.add('hide', 'appHolder');
-    genAppList.appendChild(categoryHolder);
-
     for (let element of apps) {
         const tmpButton = document.createElement('button');
         tmpButton.classList.add('launcher');
@@ -84,6 +63,32 @@ function generateAppMenuList(categoryName, apps) {
             toggleMenu();
         }
     }
+    return categoryHolder;
+}
+
+function generateAppMenuList(categoryName, apps) {
+    // id to be used for buttons
+    const id = categoryName.replace(' ', '-');
+
+    // categories and wrapper for app list
+    const categories = document.getElementById('categories');
+    const genAppList = document.getElementById('app-list');
+
+    categories.appendChild(generateCategoryButton(id, categoryName));
+    genAppList.appendChild(generateCategoryHolder(id, apps));
+}
+
+function generateAppCategories() {
+    const allApps = [];
+    const categorizedApps = AppList.getApps();
+    for (let key of Object.keys(categorizedApps)) {
+        allApps.push(...categorizedApps[key]);
+    }
+    generateAppMenuList("All Applications", allApps);
+    for (let key of Object.keys(categorizedApps)) {
+        generateAppMenuList(key, categorizedApps[key]);
+    }
+    document.getElementById('All-Applications').classList.remove('hide');
 }
 
 document.getElementById('toggle-menu').onclick = toggleMenu;
@@ -114,7 +119,7 @@ window.addEventListener("mousedown", function(e) {
         app.yOffset = app.y - Y;
     }
     const rect = document.getElementById('menu-drawer').getBoundingClientRect();
-    console.log(rect);
+
     if ((rect.left > X ||
             rect.top > Y ||
             rect.left + rect.right < X ||
@@ -127,4 +132,6 @@ window.addEventListener("mouseup", function() {
     isMouseDown = false;
     app = null;
 });
+
+// Initialize and generate app menu
 generateAppCategories();
