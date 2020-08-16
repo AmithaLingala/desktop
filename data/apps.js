@@ -17,7 +17,8 @@ export default class AppList {
                 link: 'https://codingotaku.com/DinoClone/',
                 width: 1000,
                 height: 500
-            }, {
+            }],
+            Effects: [{
                 name: '7 Segment Digital Matrix Rain',
                 link: 'https://codingotaku.com/7-Segment-Digital-Matrix-Rain/',
                 width: 1000,
